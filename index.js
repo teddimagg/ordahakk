@@ -23,7 +23,6 @@ const solver = (letters, length) => {
 			for(let i = 0; i < length; i++)
 				(tempWord.includes(comb[i])) ? remove(tempWord, comb[i]) : valid = false;
 
-			console.log(valid);
 			valid && results.push(word);
 		}
 	}

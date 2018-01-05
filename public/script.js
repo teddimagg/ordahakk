@@ -9,6 +9,7 @@ const submitForm = () => {
 		length: document.form.length.value
 	}
 	if(currentQuery.letters == query.letters && currentQuery.length == query.length) return;
+	currentQuery = query;
 	
 	fetch('/solve', {
 		method: 'post',
@@ -21,7 +22,6 @@ const submitForm = () => {
 	.then( res => res.json() )
 	.then( res => fillWithAnswers(res) );
 
-	currentQuery = query;
 }
 
 const fillWithAnswers = (answers) => {
