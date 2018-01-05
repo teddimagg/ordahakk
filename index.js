@@ -23,13 +23,12 @@ const solver = (letters, length) => {
 			for(let i = 0; i < length; i++)
 				(tempWord.includes(comb[i])) ? remove(tempWord, comb[i]) : valid = false;
 
+			console.log(valid);
 			valid && results.push(word);
 		}
 	}
 	return uniq(results);
 }
-
-// console.log( solver("skjár", 3) || "Engin niðurstaða" );
 
 // **************************************************************
 	// SERVER
@@ -48,4 +47,5 @@ app.post('/solve', function (req, res) {
 	res.send(solver(req.body.letters, req.body.length));
 })
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log('Listening on port 3000'));
