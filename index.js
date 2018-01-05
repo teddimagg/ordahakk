@@ -11,7 +11,7 @@ const remove = (array, element) => array.splice(array.indexOf(element), 1);
 
 // Solver
 const solver = (letters, length) => {
-	letters = Array.from(letters);
+	letters = Array.from(letters.toLowerCase());
 	const combinations = getCombinations(letters, length);
 
 	let results = [];
