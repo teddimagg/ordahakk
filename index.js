@@ -1,34 +1,51 @@
-const read = require('read-file');
-const getCombinations = require('./modules/combinations.js');
-let buffer = read.sync('icelandic.txt').toString().split("\n");
+// Modules
+const read = require('read-file')
+const getCombinations = require('./modules/combinations.js')
 
-const letters = Array.from("skjár");
-const length = 4;
-const combinations = getCombinations(letters, length);
+// Language
+let icelandic = read.sync('icelandic.txt').toString().split("\n");
 
-let history = [];
+// Helpers
+const uniq = a => [...new Set(a)];
+const remove = (array, element) => array.splice(array.indexOf(element), 1);
 
-let uniq = a => [...new Set(a)];
-let remove = (array, element) => array.splice(array.indexOf(element), 1);
+// Solver
+const solver = (letters, length) => {
+	letters = Array.from(letters);
+	const combinations = getCombinations(letters, length);
 
-let results = [];
-
-for(word of buffer){
-	if(word.length == length){
-		const w = word.toLowerCase();
+	let results = [];
+	for(word of icelandic){
+		if(word.length != length) continue;
+		word = word.toLowerCase();
 		for(comb of combinations){
-			let valid = true;
-			
-			let tempWord = Array.from(w);
-			
-			for(let i = 0; i < length; i++){
+			let valid = true, tempWord = Array.from(word);
+			for(let i = 0; i < length; i++)
 				(tempWord.includes(comb[i])) ? remove(tempWord, comb[i]) : valid = false;
-			}
 
-			if(valid) results.push(w);
+			valid && results.push(word);
 		}
 	}
+	return uniq(results);
 }
-console.log(uniq(results));
 
-console.log('it has been read');
+// console.log( solver("skjár", 3) || "Engin niðurstaða" );
+
+// **************************************************************
+	// SERVER
+// **************************************************************
+
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
+const path = require('path')
+
+app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.post('/solve', function (req, res) {
+	console.log(req.body);
+	res.send(solver(req.body.letters, req.body.length));
+})
+
+app.listen(3000, () => console.log('Listening on port 3000'));

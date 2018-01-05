@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Lato');
+/*
+font-family: 'Fredoka One', cursive;
+font-family: 'Lato', sans-serif;
+*/
+
+h1,h2,h3,h4 { font-family: 'Fredoka One', cursive }
+body, input, p, a { font-family: 'Lato', sans-serif }
+
+body {
+	background-color: #ededeb;
+}
+
+.container {
+	max-width: 600px;
+	width: 100%;
+	margin: 30px auto;
+	padding: 30px;
+	background-color: white;
+
+}
+
+.header {
+	padding-bottom: 30px;
+	text-align: center;
+}
+
+.header h1 {
+	color: #ffbe61;
+	font-size: 3rem;
+}
+
+form {
+	width: 100%;
+	display: flex;
+}
+
+input {
+	padding: 15px;
+	border: none;
+	margin: 10px;
+	background-color: #ededeb;
+}
+
+input:focus {
+	outline: none;
+}
+
+input[type="text"] {
+	letter-spacing: 3;
+	flex: 6;
+}
+
+input[type="number"] {
+	flex: 1;
+}
+
+input[type="submit"] {
+	flex: 1;	
+}

@@ -1,0 +1,25 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Orðahakk</title>
+	<link rel="stylesheet" href="style/normalize.css">
+	<link rel="stylesheet" href="style/main.css">
+</head>
+<body>
+	<div class="container">
+		<div class="header">
+			<h1>Orðahakk</h1>
+			<p>Stimplaðu inn alla mögulega stafi í samsetningu orðins sem þú þráir og svo lengd þess.</p>
+		</div>
+		<form name="form" onSubmit="submitForm()">
+			<input placeholder="Allir mögulegir stafir" type="text" name="letters" required >
+			<input placeholder="Fjöldi stafa" type="number" name="length" required min="2" >
+			<input type="submit" value="Sækja">
+		</form>
+		<div class="answers">
+			
+		</div>
+	</div>	
+	<script src="script.js"></script>
+</body>
+</html>
