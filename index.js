@@ -40,9 +40,6 @@ const solver = (letters, length) => {
 	return uniq(results);
 }
 
-console.log( solver("skjár", 3) || "Engin niðurstaða" );
-console.log( solver("sjárk", 3) || "Engin niðurstaða" );
-
 // **************************************************************
 	// SERVER
 // **************************************************************
@@ -56,8 +53,8 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/solve', function (req, res) {
-	console.log(req.body);
 	res.send(solver(req.body.letters, req.body.length));
 })
 
-app.listen(3000, () => console.log('Listening on port 3000'));
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log('Listening on port 3000'));

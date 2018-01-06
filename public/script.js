@@ -1,15 +1,20 @@
+mixpanel.track("Page load");
+
 let currentQuery = { letters: "", length: 0 };
+const spinner = document.querySelector('.spinner');
 
 const submitForm = () => {
 	event.preventDefault();
-	currentQuery
 	
 	const query = {
 		letters: document.form.letters.value,
 		length: document.form.length.value
 	}
 	if(currentQuery.letters == query.letters && currentQuery.length == query.length) return;
+	setSpinner(true);
+	currentQuery = query;
 	
+	mixpanel.track("Solving", query);
 	fetch('/solve', {
 		method: 'post',
 		headers: {
@@ -21,12 +26,12 @@ const submitForm = () => {
 	.then( res => res.json() )
 	.then( res => fillWithAnswers(res) );
 
-	currentQuery = query;
 }
 
+const setSpinner = status => spinner.style.display = status ? "block" : "";
 const fillWithAnswers = (answers) => {
-	let ans = `<ul>`; 
+	setSpinner(false);
+	let ans = '';
 	answers.forEach(answer => ans += `<li>${answer}</li>`); 
-	ans += `</ul>`;
-	document.querySelector('.answers').innerHTML = ans;
+	document.querySelector('.content').innerHTML = ans;
 }
